@@ -43,3 +43,5 @@ That's the reason why I created two files, development.config.js and staging.con
 - Setup and run tests with CI/CD pipeline
 - Integrate with Cypress cloud
 - More...
+## Result
+![image](https://github.com/longnv1995/rest-api-automation-cypress/assets/84616832/4a9a76b1-d04e-41dd-a70e-c984d5925aba)
