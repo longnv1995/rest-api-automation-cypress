@@ -14,11 +14,11 @@ jobs:
     environment: development
     strategy:
       fail-fast: false
-      matrix:
-       containers: [1, 2, 3, 4, 5]
+      # matrix:
+      #  containers: [1, 2, 3, 4, 5]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup npm packages
         run: npm i
       - name: Run E2E smoke tests
@@ -40,7 +40,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Upload Artifacts
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-reports-regression-test
           path: ./cypress/reports/html/
