@@ -1,0 +1,11 @@
+# dependencies
+/node_modules
+
+# testing
+cypress/reports
+cypress/videos
+cypress/screenshots
+cypress/downloads
+
+# env
+.env

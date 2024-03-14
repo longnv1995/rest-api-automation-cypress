@@ -1,0 +1,18 @@
+{
+  "reporterEnabled": "cypress-mochawesome-reporter, mocha-junit-reporter",
+  "mochaJunitReporterReporterOptions": {
+    "mochaFile": "cypress/reports/junit/results-[hash].xml"
+  },
+  "cypressMochawesomeReporterReporterOptions": {
+    "reportDir": "cypress/reports/html",
+    "quite": true,
+    "overwrite": false,
+    "html": false,
+    "json": true,
+    "embeddedScreenshots": true,
+    "charts": true,
+    "reportPageTitle": "Cypress BDD Test Report",
+    "timestamp": "mmddyyyy_HHMMss",
+    "inlineAssets": true
+  }
+}
