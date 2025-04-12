@@ -2,11 +2,11 @@ name: E2E - Smoke test
 on:
   push:
     branches:
-      - develop
+      - main
   pull_request:
     types: [opened, reopened]
     branches:
-      - develop
+      - main
   workflow_dispatch: {}
 jobs:
   cypress-run:
