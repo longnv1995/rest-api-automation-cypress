@@ -7,16 +7,16 @@ jobs:
     name: PR notification
     runs-on: ubuntu-latest
     steps:
-      - name: Send slack notification
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        uses: act10ns/slack@v2
+      - name: Post a message in a channel
+        uses: slackapi/slack-github-action@v2.0.0
         with:
-          status: ${{ job.status }}
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
           payload: |
-            {
-              "title": ${{ toJson(github.event.pull_request.title) }},
-              "author": ${{ toJson(github.event.pull_request.user.login) }},
-              "link": ${{ toJson(github.event.pull_request.html_url) }}
-            }
-        if: always()
+            text: "*GitHub Action build result*: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+            blocks:
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+              if: always()
