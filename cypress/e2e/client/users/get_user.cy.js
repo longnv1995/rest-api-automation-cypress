@@ -31,4 +31,12 @@ describe("/GET users endpoint", () => {
       });
     });
   });
+
+  it('[JIRA-28] Get a user should not returned with invalid userId', () => {
+    cy.getUser('1111').then(({ status, body }) => {
+      expect(status).to.eq(404);
+      expect(body).to.have.all.keys(UserResKey.message);
+      expect(body.message).to.eq(CommonError.resourceNotFound);
+    });
+  });
 });
