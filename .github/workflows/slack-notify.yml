@@ -18,3 +18,4 @@ jobs:
               "author": ${{ toJson(github.event.pull_request.user.login) }},
               "link": ${{ toJson(github.event.pull_request.html_url) }}
             }
+          channel: '#qa-notify'
