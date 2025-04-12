@@ -1,4 +1,4 @@
-name: E2E - Smoke test
+name: Send slack notification
 on:
   pull_request:
     types: [opened, reopened]
