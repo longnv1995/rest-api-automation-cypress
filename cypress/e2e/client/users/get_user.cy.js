@@ -28,6 +28,7 @@ describe("/GET users endpoint", () => {
         expect(status).to.eq(404);
         expect(body).to.have.all.keys(UserResKey.message);
         expect(body.message).to.eq(CommonError.resourceNotFound);
+        // expect(body.message).to.eq(CommonError.resourceNotFound);
       });
     });
   });
