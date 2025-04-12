@@ -20,3 +20,4 @@ jobs:
         curl -X POST -H 'Content-type: application/json' --data "{
           \"text\": \"A new pull request has been created:\n*Title:* ${PR_TITLE}\n*Author:* ${PR_AUTHOR}\n*URL:* ${PR_URL}\"
         }" $SLACK_WEBHOOK_URL
+      if: always()
