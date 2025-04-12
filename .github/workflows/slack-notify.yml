@@ -13,7 +13,7 @@ jobs:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
           payload: |
-            text: "Danny Torrence left a 1 star review for your property."
+            text: "Pull request opened by ${{ github.event.pull_request.user.login }}"
             blocks:
               - type: "section"
                 text:
