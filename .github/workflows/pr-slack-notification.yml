@@ -1,0 +1,22 @@
+name: Notify Slack on PR Creation
+
+on:
+  workflow_run:
+    workflows: ["Trigger Slack Notification"]
+    types:
+      - completed
+
+jobs:
+  notify-slack:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send Slack Notification
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        PR_TITLE: ${{ github.event.workflow_run.pull_requests[0].title }}
+        PR_AUTHOR: ${{ github.event.workflow_run.pull_requests[0].user.login }}
+        PR_URL: ${{ github.event.workflow_run.pull_requests[0].html_url }}
+      run: |
+        curl -X POST -H 'Content-type: application/json' --data "{
+          \"text\": \"A new pull request has been created:\n*Title:* ${PR_TITLE}\n*Author:* ${PR_AUTHOR}\n*URL:* ${PR_URL}\"
+        }" $SLACK_WEBHOOK_URL
