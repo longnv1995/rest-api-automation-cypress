@@ -12,9 +12,5 @@ jobs:
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
-          payload: |
-            {
-              "title": ${{ toJson(github.event.pull_request.title) }},
-              "author": ${{ toJson(github.event.pull_request.user.login) }},
-              "link": ${{ toJson(github.event.pull_request.html_url) }}
-            }
+          status: ${{ job.status }}
+          message: Pull request opened by github.event.pull_request.user.login }}
