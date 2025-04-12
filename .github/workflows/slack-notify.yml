@@ -7,31 +7,11 @@ jobs:
     name: PR notification
     runs-on: ubuntu-latest
     steps:
-      - name: Post a message in a channel
-        uses: slackapi/slack-github-action@v2.0.0
+      - name: Send slack notify
+        uses: 8398a7/action-slack@v3
         with:
-          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-          webhook-type: incoming-webhook
-          payload: |
-            {
-            	"blocks": [
-            		{
-            			"type": "section",
-            			"text": {
-            				"type": "mrkdwn",
-            				"text": "This is a section block with a button."
-            			},
-            			"accessory": {
-            				"type": "button",
-            				"text": {
-            					"type": "plain_text",
-            					"text": "Click Me",
-            					"emoji": true
-            				},
-            				"value": "click_me_123",
-            				"action_id": "button-action"
-            			}
-            		}
-            	]
-            }
-        if: always()
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always() # Pick up events even if the job fails or is canceled.
