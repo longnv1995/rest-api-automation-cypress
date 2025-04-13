@@ -26,11 +26,33 @@ on:
       notify:
         description: 'Notify me'
         type: string
-        default: ${{ github.triggering_actor }}
 jobs:
-  trigger_job:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Print something'
-        run: echo "Nice to meet you"
-        run: echo "See you again"
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup npm packages
+        run: npm i
+      - name: Run E2E regression tests
+        uses: cypress-io/github-action@v6
+        with:
+          record: true
+          # parallel: true
+          command: npm run cy:run:dev
+        env:
+          # Get the short ref name of the branch that triggered the workflow run
+          COMMIT_INFO_BRANCH: ${{ github.ref_name }}
+          CYPRESS_TOKEN: ${{ secrets.TOKEN }}
+          # pass the Cypress Cloud record key as an environment variable
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # pass the project ID from the secrets through environment variable
+          CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Upload Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-reports-regression-test
+          path: ./cypress/reports/html/
+          retention-days: 5
