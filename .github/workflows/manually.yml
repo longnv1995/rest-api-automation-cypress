@@ -67,10 +67,3 @@ jobs:
           # pass the project ID from the secrets through environment variable
           CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: Upload Artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: cypress-reports-regression-test
-          path: ./cypress/reports/html/
-          retention-days: 5
