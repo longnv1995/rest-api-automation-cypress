@@ -31,4 +31,10 @@ describe("/GET users endpoint", () => {
       });
     });
   });
+
+  it(`[JIRA-28] Get an invalid user`, () => {
+      cy.getUser('111aavbc').then(({ status, body }) => {
+        expect(status).to.eq(200);
+      });
+    });
 });
