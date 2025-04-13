@@ -28,8 +28,13 @@ describe("/GET users endpoint", () => {
         expect(status).to.eq(404);
         expect(body).to.have.all.keys(UserResKey.message);
         expect(body.message).to.eq(CommonError.resourceNotFound);
-        // expect(body.message).to.eq(CommonError.resourceNotFound);
       });
     });
   });
+
+  it(`[JIRA-28] Get an invalid user`, () => {
+      cy.getUser('111aavbc').then(({ status, body }) => {
+        expect(status).to.eq(200);
+      });
+    });
 });
