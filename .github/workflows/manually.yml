@@ -1,0 +1,29 @@
+name: Manually Trigger A Job
+on:
+  workflow_dispatch:
+    inputs:
+      log_level:
+        description: 'Log Level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+          - info
+          - warning
+          - error
+      environment:
+        description: 'Environment to run tests against'
+        required: true
+        default: main
+        type: choice
+        options:
+          - dev
+          - main
+          - qa
+jobs:
+  trigger_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Print something'
+        run: echo "Nice to meet you"
+        run: echo "See you again"
