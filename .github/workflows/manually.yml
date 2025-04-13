@@ -5,21 +5,37 @@ on:
       log_level:
         description: 'Log Level'
         required: true
-        default: 'warning'
+        default: 'WARNING'
         type: choice
         options:
-          - info
-          - warning
-          - error
-      tests_against_pr:
+          - INFO
+          - WARNING
+          - ERROR
+      test_against_pr:
         description: 'Pull request to run the tests'
         required: true
         type: string
+      test_branch:
+        description: 'Test branch'
+        required: true
+        default: main
+        type: string
+      test_type:
+        description: 'Test type'
+        required: true
+        default: 'smoke'
+        type: choice
+        options:
+          - smoke
+          - regression
+          - api
+          - e2e
+          - visual
       environment:
         description: 'Environment to run tests against'
         required: true
         default: dev
-        type: environment
+        type: choice
         options:
           - dev
           - staging
@@ -39,7 +55,7 @@ jobs:
         with:
           record: true
           # parallel: true
-          command: npm run cy:run:dev
+          command: npm run cy:run:${{ inputs.environment }}
         env:
           # Get the short ref name of the branch that triggered the workflow run
           COMMIT_INFO_BRANCH: ${{ github.ref_name }}
