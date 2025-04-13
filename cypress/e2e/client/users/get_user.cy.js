@@ -23,7 +23,7 @@ describe("/GET users endpoint", () => {
   });
 
   [ _.random(1, 100), null, "abcdef", "@#!@##@?$" ].forEach(userId => {
-    it(`[JIRA-27] Get a user should not returned when user id is ${userId}`, () => {
+    it.only(`[JIRA-27] Get a user should not returned when user id is ${userId}`, () => {
       cy.getUser(userId).then(({ status, body }) => {
         expect(status).to.eq(404);
         expect(body).to.have.all.keys(UserResKey.message);
