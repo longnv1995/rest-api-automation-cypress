@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint",
-    "cy:open:dev": "cypress open --browser chrome --env configFile=development",
+    "cy:open:development": "cypress open --browser chrome --env configFile=development",
     "cy:open:staging": "cypress open --browser chrome --env configFile=staging",
     "cy:open:prod": "cypress open --env configFile=production",
     "cy:run:dev": "cypress run --browser chrome --env configFile=development",
