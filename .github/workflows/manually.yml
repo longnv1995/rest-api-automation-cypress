@@ -19,7 +19,7 @@ on:
         description: 'Environment to run tests against'
         required: true
         default: dev
-        type: choice
+        type: environment
         options:
           - dev
           - staging
