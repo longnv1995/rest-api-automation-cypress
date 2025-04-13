@@ -19,8 +19,7 @@ on:
         description: 'Test branch'
         required: true
         default: main
-        type: choice
-        options: ${{ github.ref_name }}
+        type: string
       test_type:
         description: 'Test type'
         required: true
@@ -47,6 +46,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Current branch
+        run: echo ${{ github.ref_name }}
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup npm packages
