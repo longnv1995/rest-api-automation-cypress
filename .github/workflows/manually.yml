@@ -46,10 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo
-        run: echo "Checkout to branch: ${{ github.ref_name }}"
         uses: actions/checkout@v4
-        with:
-          ref: ${{ input.test_branch }}
       - name: Setup npm packages
         run: npm i
       - name: Run E2E regression tests
