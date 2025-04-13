@@ -8,7 +8,7 @@
     "cy:open:development": "cypress open --browser chrome --env configFile=development",
     "cy:open:staging": "cypress open --browser chrome --env configFile=staging",
     "cy:open:prod": "cypress open --env configFile=production",
-    "cy:run:dev": "cypress run --browser chrome --env configFile=development",
+    "cy:run:development": "cypress run --browser chrome --env configFile=development",
     "cy:run:staging": "cypress run --browser chrome --env configFile=staging",
     "cy:run:prod": "cypress run --browser chrome --env configFile=production",
     "cy:run:dev:parallel": "cypress-parallel -s cy:run:dev -t 4 --spec cypress/e2e/**/*.js -r cypress-multi-reporters"
