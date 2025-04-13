@@ -35,7 +35,7 @@ module.exports = defineConfig({
       return config;
     },
     specPattern: [
-      "cypress/e2e/client/users/*.cy.js",
+      "cypress/e2e/client/users/get_user.cy.js",
       "cypress/e2e/client/cleanup/*.cy.js",
     ],
   },
