@@ -19,7 +19,8 @@ on:
         description: 'Test branch'
         required: true
         default: main
-        type: string
+        type: choice
+        options: ${{ github.ref_name }}
       test_type:
         description: 'Test type'
         required: true
