@@ -1,17 +1,34 @@
-name: E2E - Regression Test
+name: Manually Trigger A Job
 on:
-  schedule:
-    # Daily run schedule at 11PM Central Time
-    - cron: '0 5 * * *'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      log_level:
+        description: 'Log Level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+          - info
+          - warning
+          - error
+      tests_against_pr:
+        description: 'Pull request to run the tests'
+        required: true
+        type: string
+      environment:
+        description: 'Environment to run tests against'
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - staging
+      notify:
+        description: 'Notify me'
+        type: string
 jobs:
-  cypress-run:
+  test:
     runs-on: ubuntu-latest
-    environment: production
-    strategy:
-      fail-fast: false
-      # matrix:
-      #  containers: [1, 2, 3, 4, 5]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,7 +39,7 @@ jobs:
         with:
           record: true
           # parallel: true
-          command: npm run cy:run:dev
+          command: npm run cy:run:${{ inputs.environment }}
         env:
           # Get the short ref name of the branch that triggered the workflow run
           COMMIT_INFO_BRANCH: ${{ github.ref_name }}
