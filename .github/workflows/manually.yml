@@ -11,12 +11,22 @@ on:
           - INFO
           - WARNING
           - ERROR
-      test_against_pr:
-        description: 'Pull request to run the tests'
+      environment:
+        description: 'Environment to run tests against'
         required: true
+        default: development
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+      site_url:
+        description: 'Site URL'
+        required: true
+        default: 'https://gorest.co.in/public/v2/'
         type: string
       test_branch:
-        description: 'Test branch'
+        description: 'E2E test branch'
         required: true
         default: main
         type: string
@@ -31,25 +41,15 @@ on:
           - api
           - e2e
           - visual
-      environment:
-        description: 'Environment to run tests against'
-        required: true
-        default: dev
-        type: choice
-        options:
-          - dev
-          - staging
-      notify:
-        description: 'Notify me'
-        type: string
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Current branch
-        run: echo ${{ github.ref_name }}
-      - name: Checkout
+      - name: Checkout the repo
+        run: echo "Checkout to branch: ${{ github.ref_name }}"
         uses: actions/checkout@v4
+        with:
+          ref: ${{ input.test_branch }}
       - name: Setup npm packages
         run: npm i
       - name: Run E2E regression tests
