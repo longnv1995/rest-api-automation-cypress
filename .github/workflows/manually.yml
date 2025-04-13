@@ -47,6 +47,9 @@ jobs:
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.test_branch }}
+        
       - name: Setup npm packages
         run: npm i
       - name: Run E2E regression tests
