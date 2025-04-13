@@ -11,15 +11,22 @@ on:
           - info
           - warning
           - error
+      tests_against_pr:
+        description: 'Pull request to run the tests'
+        required: true
+        type: string
       environment:
         description: 'Environment to run tests against'
         required: true
-        default: main
+        default: dev
         type: choice
         options:
           - dev
-          - main
-          - qa
+          - staging
+      notify:
+        description: 'Notify me'
+        type: string
+        default: ${{ github.triggering_actor }}
 jobs:
   trigger_job:
     runs-on: ubuntu-latest
