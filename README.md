@@ -1,7 +1,7 @@
 ## Rest API automation testing using cypress
 I'm using API from this site: https://gorest.co.in/
 
-Following this guide to setup and run API tests
+Following this guide to setup and run API tests. Nice job
 
 ## Setup
 Install Node on your machine. Check node version in .nvmrc file
